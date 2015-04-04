@@ -18,7 +18,7 @@ var targets = [BLUE, GREEN];
 var num = 0;
 var TARGET = targets[num];
 
-var mirrorFlag = true
+var mirrorFlag = true;
 
 
 
