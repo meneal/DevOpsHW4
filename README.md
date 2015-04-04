@@ -17,7 +17,6 @@ You'll need the following:
 This setup was designed to be completely self contained.  Everything is glued together with one main bash script called `install.sh`.  Basic function when `install.sh` runs is as follows:
 
 - It generates this folder structure:
-
 - root
   - App
   - deploy
@@ -25,7 +24,6 @@ This setup was designed to be completely self contained.  Everything is glued to
     - green.git
     - blue-www
     - green-www
-
 - It downloads a server setup into App and sets up blue.git and green.git as git repos.
 - It generates a post-recieve hook based on where the repo is downloaded to in both blue.git and green.git.
 - It runs npm install in the App folder and in the root folder
@@ -67,13 +65,13 @@ A screenshot is below:
 
 ![infrastructure](https://github.com/meneal/DevOpsHW4/blob/master/img/infrastructure.png)
 
-You'll see when running that going [here](http://localhost:8080) brings up the fullscreen setup shown below:
+You'll see when running that going [here](http://localhost:8080) brings up the setup shown below:
 
 ![firstcommand](https://github.com/meneal/DevOpsHW4/blob/master/img/firstcommand.png)
 
-Running without mirroring setup is as simple as setting mirrorFlag boolean on line 21 of infrastructure.js to false.
+Running without mirroring is as simple as setting mirrorFlag boolean on line 21 of infrastructure.js to false.
 
-Going to the switch route [here](http://localhost:8080/switch) results in a switch between the two deployed windows, as shown below:
+Going to the switch route [here](http://localhost:8080/switch) results in a switch between the two deployed nodes, as shown below:
 
 ![switch](https://github.com/meneal/DevOpsHW4/blob/master/img/switch.png)
 
@@ -81,6 +79,7 @@ The migration effect can be displayed by running the following set of commands:
 
 
 `cd App`
+
 `curl -F "image=@./img/morning.jpg" localhost:8080/upload`
 
 Then visit the switch route [here](http://localhost:8080/switch) as shown below:
@@ -95,11 +94,12 @@ This is accomplished without destroying the data on the original node.  Put anot
 
 ![switchmigrate3](https://github.com/meneal/DevOpsHW4/blob/master/img/switchmigrate3.png)
 
-The final big of functionality here is actual mirroring between the two nodes on uploading.  Again switching back the mirrorFlag boolean on line 21 of infrastructure.js to true the following behavior can be seen:
+The final bit of functionality here is actual mirroring between the two redis instances on uploading.  Again switching back the mirrorFlag boolean on line 21 of infrastructure.js to true the following behavior can be seen:
 
 - First run the same uploading commands as before:
 
 `cd App`
+
 `curl -F "image=@./img/morning.jpg" localhost:8080/upload`
 
 Then if we visit the meow route [here](http://localhost:8080/meow) with screenshot below:
@@ -115,3 +115,7 @@ Now upon visiting the switch route [here](http://localhost:8080/switch), and vis
 ![mirror2](https://github.com/meneal/DevOpsHW4/blob/master/img/mirror2.png)
 
 The actual port switching is shown in the console window in the middle of the screenshot.
+
+The mirror function is created by passing in command line arguments when running the actual nodes.  The function of server.js requires a port as a command line argument for the redis server that is attached to that specific node.  Additionally a second port can be passed in to server.js which is the port that it should mirror it's data to.  
+
+Sorry about the actual size of the images in this document, zooming in it is possible to see the port numbers an any other information that should be needed from each image.
