@@ -96,7 +96,7 @@ This is accomplished without destroying the data on the original node.  Put anot
 
 The final bit of functionality here is actual mirroring between the two redis instances on uploading.  Again switching back the mirrorFlag boolean on line 21 of infrastructure.js to true the following behavior can be seen:
 
-- First run the same uploading commands as before:
+Run the same uploading commands as before:
 
 `cd App`
 
